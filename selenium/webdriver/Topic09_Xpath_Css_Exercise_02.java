@@ -1,12 +1,10 @@
 
 package webdriver;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -47,8 +45,12 @@ public class Topic09_Xpath_Css_Exercise_02 {
 		// Set timeout to find element
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		String name = "Tuyet", email = "automation@gmail.net", CEmail = "automation@gmail.net",
-				password = "Tuyet123456_", CPassword = "Tuyet123456", phone = "0912345678";
+		name = "Tuyet";
+		email = "automation@gmail.net";
+		CEmail = "automation@gmail.net";
+		password = "Tuyet123456_";
+		CPassword = "Tuyet123456";
+		phone = "0912345678";
 
 	}
 
@@ -78,11 +80,13 @@ public class Topic09_Xpath_Css_Exercise_02 {
 
 		// Input data into textbox
 		driver.findElement(By.id("txtFirstname")).sendKeys(name);
-		driver.findElement(By.id("txtEmail")).sendKeys("teo123");
-		driver.findElement(By.id("txtCEmail")).sendKeys("teo123");
+		driver.findElement(By.id("txtEmail")).sendKeys("teo123@@");
+		driver.findElement(By.id("txtCEmail")).sendKeys("teo123@@");
 		driver.findElement(By.id("txtPassword")).sendKeys(password);
 		driver.findElement(By.id("txtCPassword")).sendKeys(CPassword);
 		driver.findElement(By.id("txtPhone")).sendKeys(phone);
+		Assert.assertEquals(driver.findElement(error_msg_Email).getText(), "Vui lòng nhập email hợp lệ");
+		Assert.assertEquals(driver.findElement(error_msg_CEmail).getText(), "Email nhập lại không đúng");
 
 		driver.findElement(By.xpath("//form[@id='frmLogin']//button")).click();
 
@@ -93,7 +97,7 @@ public class Topic09_Xpath_Css_Exercise_02 {
 
 	}
 
-	@Test
+//	@Test
 
 	public void TC_03_Incorrect_CEmail() {
 
@@ -113,7 +117,7 @@ public class Topic09_Xpath_Css_Exercise_02 {
 
 	}
 
-	@Test
+//	@Test
 
 	public void TC_04_Password_Less_Than_6Chars() {
 
@@ -134,7 +138,7 @@ public class Topic09_Xpath_Css_Exercise_02 {
 
 	}
 
-	@Test
+//	@Test
 
 	public void TC_05_Incorrect_Confirm_Password() {
 		// Input data into textbox
@@ -153,7 +157,7 @@ public class Topic09_Xpath_Css_Exercise_02 {
 
 	}
 
-	@Test
+//	@Test
 
 	public void TC_06_Incorrect_Phonenumber() {
 
@@ -167,7 +171,7 @@ public class Topic09_Xpath_Css_Exercise_02 {
 		driver.findElement(By.xpath("//form[@id='frmLogin']//button")).click();
 
 		// Get and verify error message text of all fields
-		Assert.assertEquals(driver.findElement(error_msg_Phone).getText(), "Vui lòng nhập số điện thoại.\r\n" + "");
+		Assert.assertEquals(driver.findElement(error_msg_Phone).getText(), "Vui lòng nhập số điện thoại.");
 		// clear du lieu
 		driver.findElement(By.id("txtPhone")).clear();
 		driver.findElement(By.id("txtPhone")).sendKeys("09821456");
@@ -189,6 +193,6 @@ public class Topic09_Xpath_Css_Exercise_02 {
 
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+//		driver.quit();
 	}
 }
