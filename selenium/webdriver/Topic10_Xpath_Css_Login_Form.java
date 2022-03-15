@@ -69,74 +69,74 @@ public class Topic10_Xpath_Css_Login_Form {
 
 	}
 
-	/*
-	 * @Test public void TC_01_Empty_Email_Password() {
-	 * 
-	 * driver.findElement(By.xpath("//button[@title='Login']")).click();
-	 * 
-	 * // Get and verify error message text of all fields
-	 * 
-	 * Assert.assertEquals(driver.findElement(error_msg_Email1).getText(),
-	 * "This is a required field.");
-	 * 
-	 * Assert.assertEquals(driver.findElement(error_msg_Password1).getText(),
-	 * "This is a required field.");
-	 * 
-	 * }
-	 * 
-	 * @Test public void TC_02_Invalid_Emaill() {
-	 * 
-	 * // Input data into textbox
-	 * 
-	 * driver.findElement(By.id("email")).sendKeys("123434234@12312.123123");
-	 * driver.findElement(By.id("pass")).sendKeys(password);
-	 * 
-	 * driver.findElement(By.xpath("//button[@title='Login']")).click();
-	 * 
-	 * // Get and verify error message text of all fields
-	 * 
-	 * Assert.assertEquals(driver.findElement(error_msg_Email2).getText(),
-	 * "Please enter a valid email address. For example johndoe@domain.com."); }
-	 * 
-	 * @Test
-	 * 
-	 * public void TC_03_Password_Less_than_6_Characters() {
-	 * 
-	 * // Input data into textbox
-	 * 
-	 * driver.findElement(By.id("email")).sendKeys(email);
-	 * 
-	 * driver.findElement(By.id("pass")).sendKeys("1234");
-	 * 
-	 * driver.findElement(By.xpath("//button[@title='Login']")).click();
-	 * 
-	 * // Get and verify error message text of all fields
-	 * 
-	 * Assert.assertEquals(driver.findElement(error_msg_Password2).getText(),
-	 * "Please enter 6 or more characters without leading or trailing spaces.");
-	 * 
-	 * }
-	 * 
-	 * @Test
-	 * 
-	 * public void TC_04_Incorrect_Password() {
-	 * 
-	 * // Input data into textbox
-	 * 
-	 * driver.findElement(By.id("email")).sendKeys(email);
-	 * 
-	 * driver.findElement(By.id("pass")).sendKeys("Teo1234");
-	 * 
-	 * driver.findElement(By.xpath("//button[@title='Login']")).click();
-	 * 
-	 * // Get and verify error message text of all fields
-	 * 
-	 * Assert.assertEquals(driver.findElement(By.xpath(
-	 * "//li[@class='error-msg']//ul//li/child::span")).getText(),
-	 * "Invalid login or password.");
-	 * 
-	 * }
-	 */
+	
+	  @Test public void TC_01_Empty_Email_Password() {
+	  
+	  driver.findElement(By.xpath("//button[@title='Login']")).click();
+	  
+	  // Get and verify error message text of all fields
+	  
+	  Assert.assertEquals(driver.findElement(error_msg_Email1).getText(),
+	  "This is a required field.");
+	  
+	  Assert.assertEquals(driver.findElement(error_msg_Password1).getText(),
+	  "This is a required field.");
+	  
+	  }
+	  
+	  @Test public void TC_02_Invalid_Emaill() {
+	  
+	  // Input data into textbox
+	  
+	  driver.findElement(By.id("email")).sendKeys("123434234@12312.123123");
+	  driver.findElement(By.id("pass")).sendKeys(password);
+	  
+	  driver.findElement(By.xpath("//button[@title='Login']")).click();
+	  
+	  // Get and verify error message text of all fields
+	  
+	  Assert.assertEquals(driver.findElement(error_msg_Email2).getText(),
+	  "Please enter a valid email address. For example johndoe@domain.com."); }
+	  
+	  @Test
+	  
+	  public void TC_03_Password_Less_than_6_Characters() {
+	  
+	  // Input data into textbox
+	  
+	  driver.findElement(By.id("email")).sendKeys(email);
+	  
+	  driver.findElement(By.id("pass")).sendKeys("1234");
+	  
+	  driver.findElement(By.xpath("//button[@title='Login']")).click();
+	  
+	  // Get and verify error message text of all fields
+	  
+	  Assert.assertEquals(driver.findElement(error_msg_Password2).getText(),
+	  "Please enter 6 or more characters without leading or trailing spaces.");
+	  
+	  }
+	  
+	  @Test
+	  
+	  public void TC_04_Incorrect_Password() {
+	  
+	  // Input data into textbox
+	  
+	  driver.findElement(By.id("email")).sendKeys(email);
+	  
+	  driver.findElement(By.id("pass")).sendKeys("Teo1234");
+	  
+	  driver.findElement(By.xpath("//button[@title='Login']")).click();
+	  
+	  // Get and verify error message text of all fields
+	  
+	  Assert.assertEquals(driver.findElement(By.xpath(
+	  "//li[@class='error-msg']//ul//li/child::span")).getText(),
+	  "Invalid login or password.");
+	  
+	  }
+	 
 	@Test
 
 	public void TC_05_06_Create_New_TC() {
