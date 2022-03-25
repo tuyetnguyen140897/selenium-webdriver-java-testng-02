@@ -257,8 +257,9 @@ public class Topic16_Handle_Textbox_TextArea {
 
 		driver.findElement(emailTextArea).sendKeys(email_edited);
 
-		// driver.findElement(By.name("sub")).click();
-
+		
+		 driver.findElement(By.name("sub")).click();
+		 
 	}
 
 	@AfterClass
