@@ -38,7 +38,7 @@ public class Topic17_Handling_Default_Dropdown {
 
 		driver.manage().window().maximize();
 
-		driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
+		driver.get("https://demo.nopcommerce.com/register");
 
 	}
 
@@ -51,11 +51,11 @@ public class Topic17_Handling_Default_Dropdown {
 
 		lastName = "Nguyen";
 
-		Day = "10";
+		Day = "1";
 
-		Month = "December";
+		Month = "May";
 
-		Year = "1997";
+		Year = "1980";
 
 		email = "Tuyet" + randomInt() + "@gmail.net";
 
@@ -79,52 +79,35 @@ public class Topic17_Handling_Default_Dropdown {
 
 		By companyNameTextbox = By.id("Company");
 
-		driver.findElement(By.id("gender-male")).click();
+		driver.findElement(genderRadio).click();
 
-		driver.findElement(By.id("FirstName")).sendKeys(firstName);
+		driver.findElement(firstNameTextbox).sendKeys(firstName);
 
-		driver.findElement(By.id("LastName")).sendKeys(lastName);
+		driver.findElement(lastNameTextbox).sendKeys(lastName);
+
+		// Select dropdown Day
 
 		select = new Select(driver.findElement(By.name("DateOfBirthDay")));
 
-		// Handle cho default dropdown chon 1 item A
-
-		/*
-		 * // select theo index
-		 * 
-		 * select.selectByIndex(0);
-		 * 
-		 * //select theo value
-		 * 
-		 * select.selectByValue("a");
-		 */
-
-		// select theo text -> Recommend nen dung
-
 		select.selectByVisibleText(Day);
 
-		/*
-		 * // 2. Kiem tra dropdown nay co phai multiple select hay ko
-		 * 
-		 * Assert.assertFalse(select.isMultiple());
-		 * 
-		 * // 3. Kiem tra xem da chon dung item A hay chua
-		 * 
-		 * Assert.assertEquals(select.getFirstSelectedOption().getText(), "10");
-		 * 
-		 * // 4. Get ra tong so item trong dropdown la bao nhieu , verify xem nos bang
-		 * bao // nhieu ?
-		 * 
-		 * Assert.assertEquals(select.getOptions().size(), 32);
-		 */
+		Assert.assertEquals(select.getOptions().size(), 32);
+
+		// Select dropdown Month
 
 		select = new Select(driver.findElement(By.name("DateOfBirthMonth")));
 
 		select.selectByVisibleText(Month);
 
+		Assert.assertEquals(select.getOptions().size(), 13);
+
+		// Select dropdown Year
+
 		select = new Select(driver.findElement(By.name("DateOfBirthYear")));
 
 		select.selectByVisibleText(Year);
+
+		Assert.assertEquals(select.getOptions().size(), 112);
 
 		driver.findElement(By.id("Email")).sendKeys(email);
 
@@ -141,11 +124,15 @@ public class Topic17_Handling_Default_Dropdown {
 		Assert.assertEquals(driver.findElement(By.xpath("//div[@class='result']")).getText(),
 				"Your registration completed");
 
+		// Click My Account
+
+		driver.findElement(By.xpath("//a[@class='button-1 register-continue-button']")).click();
+
 		driver.findElement(By.cssSelector("a.ico-account")).click();
 
-		// verify hien thi
+		// Verify Day , Month , Year
 
-		Assert.assertTrue(driver.findElement(genderRadio).isDisplayed());
+		Assert.assertTrue(driver.findElement(genderRadio).isSelected());
 
 		Assert.assertEquals(driver.findElement(firstNameTextbox).getAttribute("value"), firstName);
 
@@ -171,6 +158,7 @@ public class Topic17_Handling_Default_Dropdown {
 
 	@AfterClass
 	public void afterClass() {
+
 		// driver.quit();
 	}
 
