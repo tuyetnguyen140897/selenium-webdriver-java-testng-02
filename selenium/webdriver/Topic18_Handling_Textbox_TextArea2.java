@@ -15,7 +15,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic18_Handling_Default_Dropdown2 {
+public class Topic18_Handling_Textbox_TextArea2 {
 
 	WebDriver driver;
 
