@@ -148,41 +148,93 @@ public class Topic18_Handling_Custom_Dropdown_List {
 
 	}
 
-	/*
-	 * @Test
-	 * 
-	 * public void TC_04_Angular() {
-	 * 
-	 * driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
-	 * 
-	 * // get hidden text
-	 * 
-	 * // String script = "return document.getElementById('hidden_div').innerHTML";
-	 * 
-	 * By parent = By.xpath("//div[@class='col-lg-3 col-md-3']");
-	 * 
-	 * By child = By.xpath(
-	 * "//div[@class='col-lg-3 col-md-3']//div[@class='form-group']//ng-dropdown-panel[@class='ng-dropdown-panel ng-star-inserted ng-select-bottom']/child::div//div[@role='option']"
-	 * );
-	 * 
-	 * selectedItemDropdown(parent, child, "Mũi tiêm thứ nhất");
-	 * 
-	 * sleepInSecond(2);
-	 * 
-	 * Assert.assertTrue(isElementDisplayed(By.xpath(
-	 * "//div[@class='col-lg-3 col-md-3']//div[@class='form-group']//ng-dropdown-panel[@class='ng-dropdown-panel ng-star-inserted ng-select-bottom']/child::div//div[@role='option' and contains (string(),'Mũi tiêm thứ nhất')]"
-	 * )));
-	 * 
-	 * selectedItemDropdown(parent, child, "Mũi tiêm tiếp theo");
-	 * 
-	 * sleepInSecond(2);
-	 * 
-	 * Assert.assertTrue(isElementDisplayed(By.xpath(
-	 * "//div[@class='col-lg-3 col-md-3']//div[@class='form-group']//ng-dropdown-panel[@class='ng-dropdown-panel ng-star-inserted ng-select-bottom']/child::div//div[@role='option' and contains (string(),'Mũi tiêm tiếp theo')]"
-	 * )));
-	 * 
-	 * }
-	 */
+	// @Test
+	public void TC_04_Angular() {
+
+		driver.get("https://tiemchungcovid19.gov.vn/portal/register-person");
+
+		// get hidden text
+
+		// String script = "return document.getElementById('hidden_div').innerHTML";
+
+		By parent = By.xpath("//div[@class='col-lg-3 col-md-3']");
+
+		By child = By.xpath(
+				"//div[@class='col-lg-3 col-md-3']//div[@class='form-group']//ng-dropdown-panel[@class='ng-dropdown-panel ng-star-inserted ng-select-bottom']/child::div//div[@role='option']");
+
+		selectedItemDropdown(parent, child, "Mũi tiêm thứ nhất");
+
+		sleepInSecond(2);
+
+		Assert.assertTrue(isElementDisplayed(By.xpath(
+				"//div[@class='col-lg-3 col-md-3']//div[@class='form-group']//ng-dropdown-panel[@class='ng-dropdown-panel ng-star-inserted ng-select-bottom']/child::div//div[@role='option' and contains (string(),'Mũi tiêm thứ nhất')]")));
+
+		selectedItemDropdown(parent, child, "Mũi tiêm tiếp theo");
+
+		sleepInSecond(2);
+
+		Assert.assertTrue(isElementDisplayed(By.xpath(
+				"//div[@class='col-lg-3 col-md-3']//div[@class='form-group']//ng-dropdown-panel[@class='ng-dropdown-panel ng-star-inserted ng-select-bottom']/child::div//div[@role='option' and contains (string(),'Mũi tiêm tiếp theo')]")));
+
+	}
+
+	// @Test
+	public void TC_05_01_Editable() {
+
+		driver.get("http://indrimuska.github.io/jquery-editable-select/");
+
+		By parent = By.cssSelector("div#default-place>input");
+
+		By child = By.xpath("//ul[@class='es-list' and @style]/li");
+
+		selectedEditableDropdown(parent, child, "Nissan");
+
+		sleepInSecond(2);
+
+		Assert.assertTrue(isElementSelected(
+				By.xpath("//ul[@class='es-list' and @style]/li[@class='es-visible' and text()='Nissan']")));
+
+		driver.navigate().refresh();
+
+		selectedItemDropdown(parent, child, "Audi");
+
+		Assert.assertTrue(isElementSelected(
+				By.xpath("//ul[@class='es-list' and @style]/li[@class='es-visible' and text()='Audi']")));
+
+		sleepInSecond(2);
+
+		driver.navigate().refresh();
+
+	}
+
+	@Test
+	public void TC_05_02_Editable() {
+
+		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+
+		By parent = By.xpath("//div[@role='combobox']//input");
+
+		By child = By.xpath("//div[@role='listbox']//span");
+
+		selectedEditableDropdown(parent, child, "Afghanistan");
+
+		sleepInSecond(2);
+
+		Assert.assertTrue(
+				isElementDisplayed(By.xpath("//div[@role='listbox']//span[@class='text' and text()='Afghanistan']")));
+
+		driver.navigate().refresh();
+
+		selectedItemDropdown(parent, child, "Aland Islands");
+
+		Assert.assertTrue(
+				isElementDisplayed(By.xpath("//div[@role='listbox']//span[@class='text' and text()='Aland Islands']")));
+
+		sleepInSecond(2);
+
+		driver.navigate().refresh();
+
+	}
 
 	@AfterClass
 	public void afterClass() {
@@ -228,9 +280,52 @@ public class Topic18_Handling_Custom_Dropdown_List {
 
 					sleepInSecond(2);
 
-					break;
+				}
+
+				break;
+
+			}
+
+		}
+
+	}
+
+	public void selectedEditableDropdown(By parentElement, By childElement, String expectedItem) {
+
+		// 1.
+
+		driver.findElement(parentElement).clear();
+
+		driver.findElement(parentElement).sendKeys(expectedItem);
+
+		sleepInSecond(1);
+
+		// 2. Wait cho tat ca item load ra ( co trong DOM/HTML)
+		expliciWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(childElement));
+
+		List<WebElement> allItems = driver.findElements(childElement);
+
+		// System.out.println("All item = " + allItems.size());
+
+		for (WebElement item : allItems) {
+			if (item.getText().trim().equals(expectedItem)) {
+				if (item.isDisplayed()) {
+					// 3. Neu item minh can chon no nam trong view (nhin thay duoc) thi click vao
+
+					item.click();
+				} else {
+
+					// 4. Neu nhu item minh chon khong nhin thay ( che ben duoi) thi scroll xuong va
+
+					jsExcutor.executeScript("arguments[0].scrollIntoView(true);", item);
+
+					item.click();
+
+					sleepInSecond(2);
 
 				}
+
+				break;
 
 			}
 
